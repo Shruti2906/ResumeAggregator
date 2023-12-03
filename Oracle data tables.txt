@@ -1,0 +1,100 @@
+prepare 1st 3 pages certificate n all
+
+
+------------------------
+CREATE SEQUENCE admin_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE admin (
+  id NUMBER NOT NULL,
+  username VARCHAR2(100) NOT NULL,
+  password VARCHAR2(100) NOT NULL,
+  CONSTRAINT admin_pk PRIMARY KEY (id)
+);
+
+CREATE OR REPLACE TRIGGER admin_trigger
+BEFORE INSERT ON admin
+FOR EACH ROW
+BEGIN
+  SELECT admin_seq.NEXTVAL INTO :new.id FROM dual;
+END;
+/
+---------
+
+INSERT INTO admin (id, username, password) VALUES
+(1, 'admin', 'admin');
+--------
+
+CREATE SEQUENCE candidate_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE candidate (
+  id NUMBER,
+  fname VARCHAR2(55) NOT NULL,
+  lname VARCHAR2(55) NOT NULL,
+  education VARCHAR2(100) NOT NULL,
+  gender VARCHAR2(12) NOT NULL,
+  age VARCHAR2(12) NOT NULL,
+  mobile VARCHAR2(55) NOT NULL,
+  email VARCHAR2(255) NOT NULL,
+  uname VARCHAR2(55) NOT NULL,
+  password VARCHAR2(55) NOT NULL
+);
+
+CREATE OR REPLACE TRIGGER candidate_id_trigger
+BEFORE INSERT ON candidate
+FOR EACH ROW
+BEGIN
+  SELECT candidate_id_seq.NEXTVAL INTO :new.id FROM dual;
+END;
+/
+
+------------
+
+INSERT INTO candidate (id, fname, lname, education, gender, age, mobile, email, uname, password) VALUES
+(candidate_id_seq.NEXTVAL, 'Shruti', 'Patil', 'BE', 'Female', '22', '9359839292', 'shruti@gmail.com', 'Shruti', '12345');
+(candidate_id_seq.NEXTVAL, 'Vidhya', 'Chavan', 'MBA', 'Female', '23', '8959839292', 'vidhya@gmail.com', 'Vidhya', '12345');
+(candidate_id_seq.NEXTVAL, 'ganesh', 'kapadnis', 'Bcs Computer', 'male', 20, '9011143091', 'aa@gmail.com', 'ganesh', 'ganesh'),
+(candidate_id_seq.NEXTVAL, 'mahesh', 'kapadnis', 'B.A English', 'male', 20, '9011143091', 'pp@gmail.com', 'mahesh', 'mahesh11'),
+(candidate_id_seq.NEXTVAL, 'Shruti', 'Patil', 'B.E', 'Female', '22', '9359733209', 'patilshruti@gmail.com', '12345', '12345'),
+(candidate_id_seq.NEXTVAL, 'Vidhya', 'Chavan', 'B.E', 'Female', 22, '9899965754', 'vidhyachavan@gmail.com', '12345', '12345'),
+(candidate_id_seq.NEXTVAL, 'Raj', 'Kumar', 'MBA', 'male', '20-30', '9203839292', 'raj@gmail.com', 'raj', '1122');
+
+-----------
+CREATE SEQUENCE hr_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE hr (
+  id NUMBER,
+  fname VARCHAR2(55) NOT NULL,
+  lname VARCHAR2(55) NOT NULL,
+  gender VARCHAR2(55) NOT NULL,
+  contact VARCHAR2(55) NOT NULL,
+  mail VARCHAR2(100) NOT NULL,
+  address VARCHAR2(255) NOT NULL,
+  qualification VARCHAR2(255) NOT NULL,
+  exp VARCHAR2(55) NOT NULL,
+  dept VARCHAR2(255) NOT NULL,
+  company VARCHAR2(255) NOT NULL,
+  uname VARCHAR2(100) NOT NULL,
+  password VARCHAR2(100) NOT NULL
+);
+
+
+CREATE OR REPLACE TRIGGER hr_id_trigger
+BEFORE INSERT ON hr
+FOR EACH ROW
+BEGIN
+  SELECT hr_id_seq.NEXTVAL INTO :new.id FROM dual;
+END;
+/
+
+
+INSERT INTO hr (id, fname, lname, gender, contact, mail, address, qualification, exp, dept, company, uname, password) VALUES
+(hr_id_seq.NEXTVAL, 'Vidhya', 'Chavan', 'Female', '9143307947', 'vidhya@gmail.com', 'Pune', 'MBA', '9 month', 'computer', 'Altra tech', 'Vidhya', '12345'),
+(hr_id_seq.NEXTVAL, 'Shruti', 'Patil', 'Female', '9843307947', 'shruti@gmail.com', 'Osmanabad', 'BE', '9 month', 'computer', 'Altra tech', 'Shruti', '12345'),
+(1, 'Shruti', 'Patil', 'Female', '9143307947', 'shrutipatil@gmail.com', 'osmanabad', 'MBA', '9 month', 'computer', 'Altra tech', 'shruti', '12345'),
+(2, 'Vidhya', 'Chavan', 'Female', '9923841480', 'vidhya@gmail.com', 'pune', 'ME', '6 month', 'english', 'tech', 'vidhya', '12345'),
+(3, 'satish', 'shewale', 'male', '9921841480', 'ganesh@gmail.com', 'nampure', 'm.a', '2 month', 'english', 'insource', 'hr', 'hr'),
+(4, 'raj', 'kumar', 'male', '9988776655', 'raj@gmail.com', 'pune', 'bsc', '2 month', 'math', 'insource', 'raj11', '11raj'),
+(5, 'Kiran', 'Patil', 'male', '9128372391', 'kiran@gmail.com', 'Nashik', 'MBA', '5', 'HR', 'ABC', 'kiran', '1010');
+
+
+------------------------------
